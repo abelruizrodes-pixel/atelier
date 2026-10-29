@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atelier Fassbinder — Ingrid Schmitt-Fassbinder, Keramik, Plastik und Wandgestaltung in Trier. Alle 94 Werke im 3D Online Viewing Room." />
+  <title>ATELIER FASSBINDER — Ingrid Schmitt-Fassbinder · 3D Online Viewing Room (93 Werke)</title>
+  <link rel="icon" type="image/svg+xml" href="logo-favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-void: #0b0908;
+      --bg-glass: rgba(20, 16, 13, 0.82);
+      --bg-panel: rgba(18, 15, 12, 0.95);
+      --text-primary: #f4efe6;
+      --text-muted: rgba(244, 239, 230, 0.68);
+      --text-subtle: rgba(244, 239, 230, 0.42);
+      --accent-terracotta: #d97e4a;
+      --accent-gold: #c9a44e;
+      --accent-gold-soft: rgba(201, 164, 78, 0.28);
+      --border-hairline: rgba(244, 239, 230, 0.14);
+      --error-color: #e06c60;
+      --error-bg: rgba(224, 108, 96, 0.12);
+      --valid-color: #79b487;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-void);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    #webgl-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2;
+      display: block;
+      cursor: grab;
+    }
+    #webgl-canvas:active { cursor: grabbing; }
+
+    /* Top HUD Header */
+    .hud-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 25;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 2.5rem;
+      background: rgba(20, 17, 15, 0.88);
+      border-bottom: 1px solid rgba(201, 164, 78, 0.35);
+      backdrop-filter: blur(14px);
+      pointer-events: none;
+    }
+    .hud-header > * { pointer-events: auto; }
+    .brand-mark {
+      text-decoration: none;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-mark .b-main {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .brand-mark .b-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+    .hud-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .hud-link {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0.55rem 1.1rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.35s var(--ease-luxury);
+    }
+    .hud-link:hover, .hud-link.active {
+      border-color: var(--accent-gold);
+      background: rgba(201, 164, 78, 0.16);
+      color: #fff;
+    }
+
+    /* Hero Overlay */
+    #hero-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 15;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      pointer-events: none;
+      transition: opacity 0.8s var(--ease-luxury), visibility 0.8s;
+      background: radial-gradient(circle at center, rgba(11, 9, 8, 0.45) 0%, rgba(11, 9, 8, 0.78) 100%);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 0.9rem;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 5.6rem);
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      line-height: 1.02;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    }
+    .hero-subtitle-name {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.5vw, 2.1rem);
+      color: var(--accent-terracotta);
+      margin-bottom: 1.1rem;
+    }
+    .hero-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1rem, 1.5vw, 1.28rem);
+      color: var(--text-muted);
+      max-width: 38rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      pointer-events: auto;
+      margin-bottom: 2rem;
+    }
+    .btn-luxury {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.95rem 2rem;
+      background: rgba(201, 164, 78, 0.14);
+      border: 1px solid var(--accent-gold);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: all 0.45s var(--ease-luxury);
+    }
+    .btn-luxury:hover {
+      background: var(--accent-gold);
+      color: var(--bg-void);
+      transform: translateY(-2px);
+    }
+    .btn-luxury.secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--border-hairline);
+    }
+    .btn-luxury.secondary:hover {
+      border-color: var(--text-primary);
+      background: var(--text-primary);
+      color: var(--bg-void);
+    }
+
+    /* Interactive Artist Pill on Hero */
+    .hero-artist-pill {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: var(--bg-glass);
+      border: 1px solid var(--border-hairline);
+      padding: 0.55rem 1.2rem 0.55rem 0.55rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color 0.3s, transform 0.3s;
+      text-align: left;
+    }
+    .hero-artist-pill:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-2px);
+    }
+    .hero-artist-pill img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: 50% 18%;
+      border: 1.5px solid var(--accent-gold);
+    }
+    .hero-artist-pill .pill-text b {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-primary);
+    }
+    .hero-artist-pill .pill-text span {
+      font-size: 0.68rem;
+      color: var(--accent-gold);
+      letter-spacing: 0.08em;
+    }
+
+    /* Bottom OVR Filter & Z-Axis Telemetry Bar */
+    .ovr-bottom-bar {
+      position: fixed;
+      left: 2.5rem;
+      right: 2.5rem;
+      bottom: 1.6rem;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .ovr-filter-chips {
+      pointer-events: auto;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      background: var(--bg-glass);
+      padding: 0.45rem;
+      border: 1px solid var(--border-hairline);
+      backdrop-filter: blur(14px);
+    }
+    .ovr-chip {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .ovr-chip:hover { color: var(--text-primary); }
+    .ovr-chip.active {
+      background: var(--accent-gold);
+      color: var(--bg-void);
+      font-weight: 600;
+    }
+
+    /* Floating Hover Caption in OVR */
+    #artwork-hover-caption {
+      position: fixed;
+      z-index: 22;
+      pointer-events: none;
+      left: 2.5rem;
+      bottom: 5.5rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.35s var(--ease-luxury), transform 0.35s var(--ease-luxury);
+      background: var(--bg-glass);
+      border-left: 3px solid var(--accent-gold);
+      padding: 1rem 1.4rem;
+      backdrop-filter: blur(14px);
+      max-width: 26rem;
+    }
+    #artwork-hover-caption.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .caption-index {
+      font-size: 0.64rem;
+      letter-spacing: 0.24em;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .caption-title {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .caption-meta {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Z-Axis Telemetry */
+    .hud-coordinates {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.35rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      background: var(--bg-glass);
+      padding: 0.7rem 1rem;
+      border: 1px solid var(--border-hairline);
+      backdrop-filter: blur(12px);
+    }
+    .z-progress-bar {
+      width: 150px;
+      height: 2px;
+      background: var(--border-hairline);
+      position: relative;
+      overflow: hidden;
+    }
+    .z-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--accent-gold);
+    }
+
+    /* Artwork Detail Side Panel */
+    #artwork-detail-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(520px, 100vw);
+      height: 100vh;
+      z-index: 35;
+      background: var(--bg-panel);
+      border-left: 1px solid var(--border-hairline);
+      backdrop-filter: blur(24px);
+      padding: 4.2rem 2.5rem 2.2rem;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.65s var(--ease-luxury);
+      display: flex;
+      flex-direction: column;
+       gap: 1.2rem;
+    }
+    #artwork-detail-panel.is-open { transform: translateX(0); }
+    .panel-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      padding: 0.5rem 0.95rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .panel-close-btn:hover { border-color: var(--accent-gold); }
+    .detail-photo-wrap {
+      width: 100%;
+      max-height: 310px;
+      background: #070605;
+      border: 1px solid var(--border-hairline);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .detail-photo-wrap img {
+      max-width: 100%;
+      max-height: 306px;
+      object-fit: contain;
+    }
+    .detail-nav-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+    .detail-step-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      padding: 0.55rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .detail-step-btn:hover { border-color: var(--accent-gold); }
+    .detail-catalogue {
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+    .detail-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .detail-specs {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 1rem 0;
+      border-top: 1px solid var(--border-hairline);
+      border-bottom: 1px solid var(--border-hairline);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .spec-label {
+      display: block;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-subtle);
+      margin-bottom: 0.15rem;
+    }
+    .detail-story {
+      font-family: var(--font-serif);
+      font-size: 1.12rem;
+      line-height: 1.6;
+      color: rgba(244, 239, 230, 0.88);
+    }
+    .detail-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: auto;
+    }
+    .btn-ar {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      background: transparent;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-ar:hover { background: var(--accent-gold); color: var(--bg-void); }
+    .btn-acquire {
+      width: 100%;
+      padding: 0.95rem 1.2rem;
+      background: var(--accent-terracotta);
+      border: 1px solid var(--accent-terracotta);
+      color: #fff;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+    }
+    .btn-acquire:hover { opacity: 0.9; }
+
+    /* Native Modal Dialogs (Biography Dossier, 94-Work Grid Index, AR Room Simulator) */
+    dialog.luxury-dialog {
+      margin: auto;
+      background: var(--bg-panel);
+      color: var(--text-primary);
+      border: 1px solid var(--border-hairline);
+      max-width: 1120px;
+      width: calc(100vw - 2.5rem);
+      max-height: 90vh;
+      padding: 0;
+      overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+    }
+    dialog.luxury-dialog::backdrop {
+      background-color: rgba(6, 5, 4, 0.78);
+      backdrop-filter: blur(8px);
+    }
+    .dialog-inner {
+      padding: 2.8rem;
+      position: relative;
+    }
+
+    /* Artist Mini-Biography & Photos Grid */
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .artist-photo-collage {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+    .artist-photo-collage figure {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-hairline);
+      padding: 0.5rem;
+    }
+    .artist-photo-collage img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: 50% 18%;
+      display: block;
+    }
+    .artist-photo-collage figcaption {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.45rem;
+      line-height: 1.4;
+    }
+    .bio-facts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+    .bio-fact-card {
+      border: 1px solid var(--border-hairline);
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .bio-fact-card b {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      color: var(--accent-gold);
+      display: block;
+    }
+    .bio-fact-card span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .exhibitions-compact {
+      list-style: none;
+      margin: 1rem 0;
+      border-top: 1px solid var(--border-hairline);
+    }
+    .exhibitions-compact li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border-hairline);
+      font-size: 0.8rem;
+      gap: 1rem;
+    }
+    .exhibitions-compact li span:last-child { color: var(--accent-gold); }
+
+    /* 94-Work Catalogue Index Grid inside Dialog */
+    .catalog-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.25rem 0;
+    }
+    .catalog-search {
+      flex: 1;
+      min-width: 240px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      padding: 0.75rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+    }
+    .catalog-grid-94 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .catalog-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-hairline);
+      cursor: pointer;
+      text-align: left;
+      color: var(--text-primary);
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .catalog-item:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-3px);
+    }
+    .catalog-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #060504;
+    }
+    .catalog-item-meta {
+      padding: 0.65rem 0.75rem;
+    }
+    .catalog-item-meta b {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      display: block;
+    }
+    .catalog-item-meta span {
+      font-size: 0.68rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Form & Validation Styles (Modern Web Guidance :user-invalid) */
+    .inquiry-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-hairline);
+      padding: 1.6rem;
+    }
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+    .hint {
+      display: block;
+      color: var(--text-subtle);
+      font-size: 0.7rem;
+      margin-bottom: 0.3rem;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      padding: 0.7rem 0.85rem;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      outline: none;
+    }
+    .error-msg {
+      display: none;
+      color: var(--error-color);
+      font-size: 0.73rem;
+      margin-top: 0.3rem;
+    }
+    input:user-invalid, textarea:user-invalid,
+    input.user-invalid-fallback, textarea.user-invalid-fallback {
+      border-color: var(--error-color);
+      background-color: var(--error-bg);
+    }
+    input:user-invalid + .error-msg, textarea:user-invalid + .error-msg,
+    input.user-invalid-fallback + .error-msg, textarea.user-invalid-fallback + .error-msg {
+      display: block;
+    }
+    input:user-valid, textarea:user-valid,
+    input.user-valid-fallback, textarea.user-valid-fallback {
+      border-color: var(--valid-color);
+    }
+
+    /* AR Stage */
+    .ar-stage {
+      position: relative;
+      height: 410px;
+      background: radial-gradient(circle at 50% 35%, #2f2924 0%, #120f0d 78%);
+      border: 1px solid var(--border-hairline);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin: 1.2rem 0;
+    }
+    .ar-grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(201, 164, 78, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(201, 164, 78, 0.08) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+    }
+    .ar-artwork-frame {
+      position: relative;
+      z-index: 2;
+      width: 230px;
+      height: 280px;
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.8);
+      border: 5px solid #1d1916;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #0e0c0a;
+      transition: transform 0.3s var(--ease-luxury);
+    }
+    .ar-dimension-tag {
+      margin-top: 0.9rem;
+      z-index: 2;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(0, 0, 0, 0.72);
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--accent-gold-soft);
+    }
+
+    @media (max-width: 860px) {
+      .hud-header { padding: 1rem 1.2rem; }
+      .dossier-grid { grid-template-columns: 1fr; }
+      .artist-photo-collage { grid-template-columns: 1fr; }
+      .ovr-bottom-bar { left: 1rem; right: 1rem; bottom: 1rem; }
+      #artwork-hover-caption { left: 1rem; right: 1rem; bottom: 7.5rem; }
+      .dialog-inner { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top HUD Navigation -->
+  <header class="hud-header" role="banner">
+    <a href="#top" class="brand-mark" id="reset-camera-link" style="display:inline-flex; flex-direction:row; align-items:center; gap:0.85rem;">
+      <img src="logo-favicon.svg" alt="" aria-hidden="true" width="44" height="44" style="border-radius:8px; border:1px solid rgba(201,164,78,0.45); flex-shrink:0;" />
+      <span style="display:flex; flex-direction:column;">
+        <span class="b-main">Atelier Fassbinder</span>
+        <span class="b-sub">Ingrid Schmitt-Fassbinder · Keramik · Plastik · Trier</span>
+      </span>
+    </a>
+    <nav class="hud-nav" aria-label="Hauptnavigation">
+      <button type="button" class="hud-link" id="nav-ovr-btn">👁‍🗨 Matterport Tour 3D</button>
+      <button type="button" class="hud-link" id="toggle-dollhouse-btn">⬡ Dollhouse 3D (Maqueta)</button>
+      <button type="button" class="hud-link" id="nav-catalog-btn">Alle 93 Werke (Katalog)</button>
+      <a href="biografie.html" class="hud-link" id="nav-dossier-btn" style="text-decoration:none; display:inline-block;">Die Künstlerin · Biografie (Subpagina) →</a>
+    </nav>
+  </header>
+
+  <!-- Hero Overlay (teamLab / Lusion Shader + Ingrid Schmitt-Fassbinder Info & Portrait) -->
+  <section id="hero-overlay" aria-labelledby="hero-heading">
+    <p class="hero-eyebrow">Atelier in Trier · seit 1975 · 93 Originalwerke im 3D-Raum</p>
+    <h1 class="hero-title" id="hero-heading">ATELIER FASSBINDER</h1>
+    <p class="hero-subtitle-name">Ingrid Schmitt-Fassbinder — Keramik · Plastik · Wandgestaltung</p>
+    <blockquote class="hero-quote">
+      „Meine Werke können Sie jederzeit nach Vereinbarung in meinem Atelier besichtigen.“
+    </blockquote>
+
+    <div class="hero-ctas">
+      <button type="button" class="btn-luxury" id="enter-ovr-btn">
+        <span>Enter 3D Online Viewing Room (93 Werke)</span>
+        <span aria-hidden="true">⟶</span>
+      </button>
+      <button type="button" class="btn-luxury secondary" id="hero-catalog-btn">
+        <span>Galerie-Übersicht (Alle 93 Werke)</span>
+      </button>
+    </div>
+
+    <a href="biografie.html" class="hero-artist-pill" id="hero-artist-btn" style="padding: 0.7rem 1.5rem; text-decoration: none;" aria-label="Biografie-Subseite mit Karriere, Ausstellungen, Werkstandorten und Fotos von Ingrid Schmitt-Fassbinder öffnen">
+      <div class="pill-text">
+        <b>✦ Ingrid Schmitt-Fassbinder · Biografie-Subseite öffnen</b>
+        <span>Fotos der Künstlerin, Werdegang, Ausstellungen &amp; Standorte ihrer Werke →</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- Floating Hover Caption in 3D OVR -->
+  <aside id="artwork-hover-caption" aria-live="polite">
+    <span class="caption-index" id="caption-index">FOTO NR. 1 / 94 · FIGUREN &amp; PLASTIKEN</span>
+    <h2 class="caption-title" id="caption-title">Foto Nr. 1</h2>
+    <p class="caption-meta" id="caption-meta">Vier dunkle, stark stilisierte Keramikfiguren auf weißen Sockeln vor heller Wand</p>
+  </aside>
+
+  <!-- Bottom Bar: Live 3D Category Filters (94 Works) + Z-Axis Telemetry -->
+  <div class="ovr-bottom-bar">
+    <div class="ovr-filter-chips" role="group" aria-label="Werkgruppen im 3D-Raum filtern">
+      <button type="button" class="ovr-chip active" data-cat="all">Alle Werke (93)</button>
+      <button type="button" class="ovr-chip" data-cat="figuren">Figuren &amp; Plastiken (48)</button>
+      <button type="button" class="ovr-chip" data-cat="reliefs">Reliefs &amp; Wandarbeiten (18)</button>
+      <button type="button" class="ovr-chip" data-cat="bau">Kunst am Bau &amp; Außenraum (18)</button>
+      <button type="button" class="ovr-chip" data-cat="ansichten">Atelier &amp; Ansichten (9)</button>
+    </div>
+
+    <div class="hud-coordinates" aria-hidden="true">
+      <canvas id="floorplan-radar" width="92" height="140" title="Klicken zum Teleportieren im Grundriss" style="pointer-events:auto;cursor:pointer;border:1px solid rgba(201,164,78,0.4);margin-bottom:4px;"></canvas>
+      <span id="z-coord-readout">Z-ACHSE // WERK 01 / 93</span>
+      <div class="z-progress-bar">
+        <div class="z-progress-fill" id="z-progress-fill"></div>
+      </div>
+      <span>SCROLLEN ZUM FLIEGEN · KLICK AUF WERK FÜR DETAILS &amp; AR</span>
+    </div>
+  </div>
+
+  <!-- Selected Artwork Detail Side Panel (Foto Nr. 1–94) -->
+  <aside id="artwork-detail-panel" aria-labelledby="detail-title" aria-hidden="true">
+    <button type="button" class="panel-close-btn" id="close-detail-btn">Zurück zum 3D-Raum [ESC]</button>
+
+    <div>
+      <p class="detail-catalogue" id="detail-catalogue">WERK 1 VON 94 · FIGUREN &amp; PLASTIKEN</p>
+      <h2 class="detail-title" id="detail-title">Foto Nr. 1</h2>
+    </div>
+
+    <div class="detail-photo-wrap">
+      <img id="detail-img" alt="" />
+    </div>
+
+    <div class="detail-nav-row">
+      <button type="button" class="detail-step-btn" id="prev-work-btn">‹ Vorheriges Werk</button>
+      <button type="button" class="detail-step-btn" id="rotate-360-btn">↻ 360° Drehen</button>
+      <button type="button" class="detail-step-btn" id="next-work-btn">Nächstes Werk ›</button>
+    </div>
+
+    <div class="detail-specs">
+      <div>
+        <span class="spec-label">Künstlerin</span>
+        <span>Ingrid Schmitt-Fassbinder</span>
+      </div>
+      <div>
+        <span class="spec-label">Werkgruppe</span>
+        <span id="detail-category">Figuren &amp; Plastiken</span>
+      </div>
+      <div>
+        <span class="spec-label">Technik / Material</span>
+        <span id="detail-medium">Ton, Salzbrandkeramik / Unikat</span>
+      </div>
+      <div>
+        <span class="spec-label">Maße &amp; Preis</span>
+        <span>Auf Anfrage (Atelier Trier)</span>
+      </div>
+    </div>
+
+    <div class="detail-story" id="detail-story">
+      <p id="detail-alt-text"></p>
+      <p style="margin-top: 0.65rem; font-size: 0.95rem; color: var(--text-muted);">
+        Entstanden in Handarbeit im Trierer Atelier (Heinrich-Brauns-Str. 6). Alle Originale können nach Vereinbarung persönlich besichtigt werden.
+      </p>
+    </div>
+
+    <div class="detail-actions">
+      <button type="button" class="btn-ar" id="open-ar-btn">
+        ⬡ View in My Room (AR-Raumprojektion)
+      </button>
+      <button type="button" class="btn-acquire" id="inquire-piece-btn">
+        Zu diesem Werk anfragen (Atelier Trier)
+      </button>
+    </div>
+  </aside>
+
+  <!-- Modal 1: Complete 94-Work Interactive Catalogue Grid (Search & Filter + 3D Teleport) -->
+  <dialog id="catalog-dialog" class="luxury-dialog" closedby="any" aria-labelledby="catalog-dialog-title">
+    <div class="dialog-inner">
+      <button type="button" class="panel-close-btn" id="close-catalog-btn">Schließen [ESC]</button>
+      <p class="detail-catalogue">VOLLSTÄNDIGES WERKVERZEICHNIS · ATELIER-FASSBINDER.DE</p>
+      <h2 class="detail-title" id="catalog-dialog-title">Alle 94 Fotos ihres Werks</h2>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.35rem;">
+        Klicken Sie auf eines der 94 Fotos, um im 3D Online Viewing Room direkt zu diesem Werk zu fliegen und die Großansicht zu öffnen.
+      </p>
+
+      <div class="catalog-controls">
+        <input
+          type="search"
+          id="catalog-search-input"
+          class="catalog-search"
+          placeholder="Motiv oder Fotonummer suchen — z. B. Stele, Relief, Schulhof, Foto 12 …"
+          aria-label="In den 94 Werken suchen"
+        />
+        <div class="ovr-filter-chips" id="modal-filter-chips">
+          <button type="button" class="ovr-chip active" data-modal-cat="all">Alle (93)</button>
+          <button type="button" class="ovr-chip" data-modal-cat="figuren">Figuren (48)</button>
+          <button type="button" class="ovr-chip" data-modal-cat="reliefs">Reliefs (18)</button>
+          <button type="button" class="ovr-chip" data-modal-cat="bau">Kunst am Bau (18)</button>
+          <button type="button" class="ovr-chip" data-modal-cat="ansichten">Atelier (9)</button>
+        </div>
+      </div>
+
+      <p id="catalog-count-label" style="font-size: 0.76rem; color: var(--accent-gold); letter-spacing: 0.14em; text-transform: uppercase;">
+        Alle 94 Fotos der Galerie
+      </p>
+
+      <div class="catalog-grid-94" id="catalog-grid-94"></div>
+    </div>
+  </dialog>
+
+  <!-- Modal 2: Die Künstlerin — Minibiografie, Fotos der Künstlerin, Ausstellungen & Kontakt -->
+  <dialog id="dossier-dialog" class="luxury-dialog" closedby="any" aria-labelledby="dossier-title">
+    <div class="dialog-inner">
+      <button type="button" class="panel-close-btn" id="close-dossier-btn">Schließen [ESC]</button>
+      <div class="dossier-grid">
+        <!-- Left Column: Artist Mini-Biography, Real Portraits, Studio Photos & Exhibitions -->
+        <div>
+          <p class="detail-catalogue">DIE KÜNSTLERIN · BIOGRAFIE, ATELIERFOTOS &amp; LAUFBAHN</p>
+          <h2 class="detail-title" id="dossier-title">Ingrid Schmitt-Fassbinder</h2>
+          <p style="font-size: 0.98rem; color: var(--accent-gold); margin: 0.35rem 0 0.85rem;">
+            Keramikerin und Bildhauerin in Trier · Freischaffend seit 1975 · Mitgründerin der EKA Trier
+          </p>
+
+          <!-- Original Artist Photos from https://abelruizrodes-pixel.github.io/atelier/ (including Foto 47) -->
+          <div class="artist-photo-collage" style="grid-template-columns: repeat(3, 1fr);">
+            <figure>
+              <img id="bio-img-portrait" alt="Schwarz-Weiß-Porträt der Künstlerin Ingrid Schmitt-Fassbinder" />
+              <figcaption><b>Ingrid Schmitt-Fassbinder</b> — Porträt der Künstlerin in Schwarz-Weiß.</figcaption>
+            </figure>
+            <figure>
+              <img id="bio-img-photo47" alt="Porträt von Ingrid Schmitt-Fassbinder mit rotem Haar und Kappe (Foto 47)" />
+              <figcaption><b>Ingrid Schmitt-Fassbinder (Foto 47):</b> Porträt der Künstlerin in Farbe.</figcaption>
+            </figure>
+            <figure>
+              <img id="bio-img-stele" alt="Ingrid Schmitt-Fassbinder neben einer hohen, mehrteiligen Keramiksäule aus ihrem Werk" />
+              <figcaption><b>Im Maßstab ihres Werks:</b> Die Künstlerin neben einer hohen Keramiksäule.</figcaption>
+            </figure>
+          </div>
+
+          <div style="font-family: var(--font-serif); font-size: 1.12rem; line-height: 1.68; color: rgba(244, 239, 230, 0.9);">
+            <p style="margin-bottom: 0.8rem;">
+              <b>Wer sie ist:</b> Ingrid Schmitt-Fassbinder ist die Künstlerin hinter dem Atelier Fassbinder. Ihr Material ist der Ton, ihr Thema der Mensch: überlängt, still und von archaischer Präsenz. Im Salzbrand erhalten die Oberflächen ihre dunklen, erdigen Töne — jede Figur ein Unikat, das erst im Ofen seine endgültige Haut bekommt.
+            </p>
+            <p style="margin-bottom: 0.8rem;">
+              <b>Ihre Laufbahn:</b> 1975 begann sie ihre Tätigkeit als freischaffende Künstlerin im In- und Ausland. 1977 gehörte sie zu den Gründungsmitgliedern der Europäischen Kunst Akademie Trier (EKA). Der Lehre blieb sie 36 Jahre lang verbunden — als Dozentin an Akademien in Deutschland, Österreich, Ungarn, Frankreich und Kanada.
+            </p>
+            <p>
+              <b>Anerkennung &amp; Öffentlicher Raum:</b> Sie ist Preisträgerin öffentlicher Wettbewerbe für Wandgestaltung und Plastik und führte die Kunst-am-Bau-Werke an den Schulen in Niederahr und Herschbach aus.
+            </p>
+          </div>
+
+          <!-- Key Milestones -->
+          <div class="bio-facts-grid">
+            <div class="bio-fact-card">
+              <b>1975</b>
+              <span>Freischaffende Künstlerin im In- und Ausland</span>
+            </div>
+            <div class="bio-fact-card">
+              <b>1977</b>
+              <span>Gründungsmitglied der Europäischen Kunst Akademie Trier</span>
+            </div>
+            <div class="bio-fact-card">
+              <b>36 Jahre</b>
+              <span>Dozentin in Deutschland, Österreich, Ungarn, Frankreich &amp; Kanada</span>
+            </div>
+            <div class="bio-fact-card">
+              <b>Kunst am Bau</b>
+              <span>Preisträgerin öffentlicher Wettbewerbe (Niederahr &amp; Herschbach)</span>
+            </div>
+          </div>
+
+          <!-- Additional Studio & Exhibition Photos -->
+          <div class="artist-photo-collage">
+            <figure>
+              <img id="bio-img-worktable" alt="Im Atelier: eine hohe Figur im Entstehen auf dem Arbeitstisch, umgeben von Pinseln und Werkzeugen" />
+              <figcaption><b>Das Atelier in Trier:</b> Eine hohe Figur im Entstehen auf dem Arbeitstisch in der Heinrich-Brauns-Straße 6.</figcaption>
+            </figure>
+            <figure>
+              <img id="bio-img-exhibition" alt="Ausstellungsraum mit Keramikfiguren auf Sockeln und einer Bodeninstallation" />
+              <figcaption><b>Ausstellungsansicht:</b> Figuren auf Sockeln, Wandbild und Bodeninstallation aus Keramik.</figcaption>
+            </figure>
+          </div>
+
+          <!-- Exhibitions List -->
+          <p class="detail-catalogue" style="margin-top: 1.4rem;">AUSSTELLUNGEN · VON TRIER BIS TAIPEH</p>
+          <ul class="exhibitions-compact">
+            <li><span>Dozentenausstellung der Europäischen Kunst Akademie (EKA)</span><span>Trier · Deutschland</span></li>
+            <li><span>Concorso Internazionale della Ceramica d’Arte</span><span>Italien</span></li>
+            <li><span>Salon de Printemps</span><span>Luxemburg</span></li>
+            <li><span>Salzbrand — Keramikmuseum Westerwald</span><span>Westerwald · Deutschland</span></li>
+            <li><span>Europa der Keramiker (Wanderausstellung)</span><span>Frankreich · Spanien · Österreich · Ungarn</span></li>
+            <li><span>Salzglasur — Kurfürstliches Schloss Koblenz</span><span>Koblenz · Deutschland</span></li>
+            <li><span>Casa-Museu Teixeira Lopes</span><span>Vila Nova de Gaia · Portugal</span></li>
+            <li><span>National Taiwan Museum of Fine Arts</span><span>Taipeh · Taiwan</span></li>
+          </ul>
+
+          <!-- Where Her Works Are Located (Standorte & Sammlungen) -->
+          <p class="detail-catalogue" style="margin-top: 1.4rem;">WO SICH IHRE WERKE BEFINDEN · STANDORTE &amp; SAMMLUNGEN</p>
+          <ul class="exhibitions-compact">
+            <li>
+              <span><b>Schulen in Niederahr &amp; Herschbach</b> — Öffentlich zugängliche „Kunst am Bau“-Werke (Stelen, Wandgestaltungen &amp; Großplastiken aus gewonnenen öffentlichen Wettbewerben)</span>
+              <span>Niederahr &amp; Herschbach</span>
+            </li>
+            <li>
+              <span><b>Öffentliche &amp; Institutionelle Sammlungen</b> — Ankäufe und Bestände aus internationalen Keramik- und Kunstausstellungen in Europa und Asien</span>
+              <span>Europa &amp; Asien</span>
+            </li>
+            <li>
+              <span><b>Private Kunstsammlungen</b> — Unikate (Salzbrandfiguren, Büsten &amp; mehrteilige Wandreliefs) in Privatsammlungen</span>
+              <span>In- &amp; Ausland</span>
+            </li>
+            <li>
+              <span><b>Atelier Fassbinder (Ständige Werkschau der Originale)</b> — Heinrich-Brauns-Straße 6, Besichtigung nach persönlicher Vereinbarung</span>
+              <span>D-54296 Trier</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Column: Trier Atelier Contact Details & Private Inquiry Form -->
+        <div>
+          <div class="inquiry-card" style="margin-bottom: 1.25rem;">
+            <p class="detail-catalogue">BESUCH &amp; KONTAKT · TRIER</p>
+            <h3 style="font-family: var(--font-serif); font-size: 1.65rem; font-weight: 400; margin: 0.3rem 0 0.75rem;">
+              Das Atelier in Trier
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 1rem;">
+              Alle Werke können Sie jederzeit nach Vereinbarung im Original besichtigen:
+            </p>
+            <div style="font-size: 0.82rem; line-height: 1.75; border-top: 1px solid var(--border-hairline); padding-top: 0.75rem;">
+              <div><strong style="color: var(--accent-gold);">Adresse:</strong> Atelier Fassbinder · Heinrich-Brauns-Str. 6 · D-54296 Trier</div>
+              <div><strong style="color: var(--accent-gold);">Telefon:</strong> <a href="tel:+496519948335" style="color: var(--text-primary);">0651 – 994 83 35</a></div>
+              <div><strong style="color: var(--accent-gold);">Mobil:</strong> <a href="tel:+4915122441122" style="color: var(--text-primary);">0151 – 2244 1122</a></div>
+              <div><strong style="color: var(--accent-gold);">E-Mail:</strong> <a href="mailto:info@atelier-fassbinder.de" style="color: var(--text-primary);">info@atelier-fassbinder.de</a></div>
+              <div><strong style="color: var(--accent-gold);">Besuche:</strong> Jederzeit nach Vereinbarung</div>
+            </div>
+          </div>
+
+          <div class="inquiry-card">
+            <p class="detail-catalogue">PRIVATE INQUIRY &amp; ATELIERBESUCH</p>
+            <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; margin: 0.25rem 0 1rem;">
+              Werk-Anfrage oder Termin vereinbaren
+            </h3>
+
+            <!-- [CMS / E-COMMERCE HOOK]: Sends directly to info@atelier-fassbinder.de or custom backend -->
+            <form id="collector-inquiry-form" novalidate>
+              <div class="field">
+                <label for="collector-name">Ihr Name / Institution</label>
+                <span id="name-hint" class="hint">Vor- und Nachname oder Sammlung</span>
+                <input
+                  type="text"
+                  id="collector-name"
+                  name="collectorName"
+                  required
+                  minlength="2"
+                  autocomplete="name"
+                  aria-describedby="name-hint"
+                  aria-errormessage="name-error"
+                />
+                <div id="name-error" class="error-msg">
+                  <span aria-hidden="true">✦</span> Bitte geben Sie Ihren Namen ein.
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="collector-email">E-Mail-Adresse</label>
+                <span id="email-hint" class="hint">Format: name@beispiel.de</span>
+                <input
+                  type="email"
+                  id="collector-email"
+                  name="collectorEmail"
+                  required
+                  autocomplete="email"
+                  aria-describedby="email-hint"
+                  aria-errormessage="email-error"
+                />
+                <div id="email-error" class="error-msg">
+                  <span aria-hidden="true">✦</span> Bitte geben Sie eine gültige E-Mail-Adresse ein.
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="collector-work">Ausgewähltes Werk (Foto Nr. 1–94)</label>
+                <select id="collector-work" name="selectedWork">
+                  <option value="Allgemeine Anfrage / Atelierbesuch in Trier">Allgemeine Anfrage / Atelierbesuch in Trier</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="collector-notes">Nachricht an Ingrid Schmitt-Fassbinder</label>
+                <span id="notes-hint" class="hint">Fragen zu Maßen, Verfügbarkeit oder Wunschtermin im Atelier Trier</span>
+                <textarea
+                  id="collector-notes"
+                  name="collectorNotes"
+                  rows="3"
+                  required
+                  minlength="8"
+                  aria-describedby="notes-hint"
+                  aria-errormessage="notes-error"
+                ></textarea>
+                <div id="notes-error" class="error-msg">
+                  <span aria-hidden="true">✦</span> Bitte geben Sie eine kurze Nachricht (mind. 8 Zeichen) ein.
+                </div>
+              </div>
+
+              <button type="submit" class="btn-acquire" id="submit-inquiry-btn">
+                Anfrage an info@atelier-fassbinder.de senden
+              </button>
+              <p id="inquiry-status" style="margin-top: 0.75rem; font-size: 0.76rem; color: var(--accent-gold); display: none;"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Modal 3: AR "View in My Room" Simulator -->
+  <dialog id="ar-dialog" class="luxury-dialog" closedby="any" aria-labelledby="ar-dialog-title">
+    <div class="dialog-inner">
+      <button type="button" class="panel-close-btn" id="close-ar-btn">AR schließen [ESC]</button>
+      <p class="detail-catalogue">AUGMENTED REALITY // WEBXR &amp; USDZ RAUMPROJEKTION</p>
+      <h2 class="detail-title" id="ar-dialog-title">View in My Room — Maßstabs-Simulation</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">
+        Testen Sie die Wirkung von Keramikplastik, Stele oder Wandrelief im Raum.
+      </p>
+
+      <div class="ar-stage">
+        <div class="ar-grid-overlay"></div>
+        <div class="ar-artwork-frame" id="ar-artwork-preview"></div>
+        <div class="ar-dimension-tag" id="ar-dimension-label">Foto Nr. 1 · Distanz: 2.8m</div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+        <label style="font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 0.8rem;">
+          <span>Betrachtungsabstand:</span>
+          <input type="range" id="ar-distance-slider" min="0.65" max="1.35" step="0.02" value="1" />
+        </label>
+        <a href="#ar-quicklook" rel="ar" class="btn-luxury" id="launch-native-ar-btn" style="text-decoration: none; padding: 0.7rem 1.4rem;">
+          <span>Mobile AR / Atelierbesuch für Original-Maßstab anfragen</span>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Three.js Canvas & Scroll Proxy -->
+  <canvas id="webgl-canvas" aria-label="Interaktiver 3D Online Viewing Room mit allen 94 Werken von Ingrid Schmitt-Fassbinder"></canvas>
+  <main id="scroll-proxy" aria-hidden="true"></main>
+
+  <script src="atelier-data.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="matterport-engine.js"></script>
+  <script src="matterport-controller.js"></script>
+</body>
+</html>

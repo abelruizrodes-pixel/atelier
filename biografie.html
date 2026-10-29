@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Biografie, Karriere, Ausstellungen und Werkstandorte von Ingrid Schmitt-Fassbinder — Atelier Fassbinder, Trier." />
+  <title>Ingrid Schmitt-Fassbinder — Biografie, Karriere &amp; Ausstellungen | Atelier Fassbinder Trier</title>
+  <link rel="icon" type="image/svg+xml" href="logo-favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --clay-cream: #f4eee3;
+      --clay-sand: #e8dfd0;
+      --clay-surface: #fbf8f2;
+      --kiln-umber: #231c17;
+      --kiln-dark: #231c17;
+      --kiln-deep: #161513;
+      --kiln-ash: #5c5246;
+      --ash-taupe: #6e6254;
+      --kiln-muted: #827565;
+      --oxide-rust: #96431e;
+      --oxide-terracotta: #a36841;
+      --engobe-gold: #a67c2e;
+      --engobe-gold-light: #bfa571;
+      --border-clay: #d5c9b6;
+      --border-dark: rgba(244, 238, 227, 0.16);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --shadow-ceramic: 0 24px 60px rgba(35, 28, 23, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--clay-cream);
+      color: var(--kiln-umber);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      line-height: 1.68;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Architectural Museum Header with 3-Stele Emblem Logo */
+    .subpage-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(22, 21, 19, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 2px solid var(--engobe-gold-light);
+      box-shadow: 0 12px 34px rgba(15, 12, 10, 0.28);
+      padding: 0.75rem clamp(1.25rem, 4vw, 3.25rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--clay-cream);
+    }
+    .brand-logo-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      background: #161513;
+      border: 1px solid rgba(191, 165, 113, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.55);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .brand-lockup:hover .brand-logo-badge {
+      transform: translateY(-2px) scale(1.03);
+      border-color: var(--engobe-gold-light);
+    }
+    .brand-logo-badge svg {
+      width: 44px;
+      height: 44px;
+      display: block;
+    }
+    .brand-logo-badge .stele-center {
+      transition: transform 0.35s ease;
+      transform-origin: center bottom;
+    }
+    .brand-lockup:hover .stele-center {
+      transform: translateY(-2px);
+    }
+    .brand-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(191, 165, 113, 0.32);
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay-cream);
+      line-height: 1.05;
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--engobe-gold-light);
+      font-weight: 500;
+    }
+    .subpage-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.35rem;
+      flex-wrap: wrap;
+    }
+    .subpage-nav a:not(.btn-back-3d) {
+      position: relative;
+      text-decoration: none;
+      color: rgba(244, 238, 227, 0.82);
+      font-size: 0.73rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 0.35rem 0;
+      transition: color 0.25s;
+    }
+    .subpage-nav a:not(.btn-back-3d)::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 1.5px;
+      background: var(--engobe-gold-light);
+      transition: width 0.25s ease;
+    }
+    .subpage-nav a:not(.btn-back-3d):hover {
+      color: #ffffff;
+    }
+    .subpage-nav a:not(.btn-back-3d):hover::after {
+      width: 100%;
+    }
+    .btn-back-3d {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.65rem 1.25rem;
+      background: linear-gradient(135deg, var(--oxide-rust) 0%, var(--oxide-terracotta) 100%);
+      border: 1px solid rgba(191, 165, 113, 0.45);
+      border-radius: 4px;
+      color: #fff !important;
+      font-size: 0.71rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    }
+    .btn-back-3d:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+      box-shadow: 0 8px 20px rgba(150, 67, 30, 0.4);
+    }
+
+    /* Layout Containers */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3.5rem);
+    }
+    section {
+      padding: clamp(4rem, 7vw, 6.5rem) 0;
+    }
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--oxide-rust);
+      margin-bottom: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .eyebrow::after {
+      content: '';
+      height: 1px;
+      width: 46px;
+      background: currentColor;
+      opacity: 0.55;
+    }
+
+    /* Hero Monograph Section */
+    .bio-hero {
+      background: linear-gradient(180deg, var(--clay-surface) 0%, var(--clay-cream) 100%);
+      border-bottom: 1px solid var(--border-clay);
+      padding: clamp(3.2rem, 6vw, 5.2rem) 0;
+    }
+    .bio-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 5.6vw, 4.8rem);
+      font-weight: 500;
+      line-height: 1.04;
+      margin-bottom: 1.15rem;
+      color: var(--kiln-umber);
+    }
+    .bio-hero h1 em {
+      color: var(--oxide-rust);
+      font-style: italic;
+    }
+    .hero-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.25rem, 2.1vw, 1.65rem);
+      color: var(--kiln-ash);
+      border-left: 3px solid var(--oxide-rust);
+      padding-left: 1.4rem;
+      line-height: 1.45;
+      max-width: 78ch;
+      margin-bottom: 2.75rem;
+    }
+
+    /* 3 Personal Photographs of the Artist (Portrait B/W, Foto 47 in Color, Artist beside Stele) */
+    .artist-triptych {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr 0.95fr;
+      gap: 1.75rem;
+      align-items: start;
+    }
+    .artist-card {
+      background: var(--clay-surface);
+      border: 1px solid var(--border-clay);
+      padding: 0.85rem;
+      box-shadow: var(--shadow-ceramic);
+    }
+    .artist-card img {
+      width: 100%;
+      height: 410px;
+      object-fit: cover;
+      object-position: 50% 18%;
+      display: block;
+    }
+    .artist-card figcaption {
+      padding: 0.95rem 0.4rem 0.35rem;
+      font-size: 0.84rem;
+      color: var(--kiln-ash);
+      line-height: 1.5;
+    }
+    .caption-tag {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--oxide-rust);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .artist-card figcaption h4 {
+      color: var(--kiln-umber);
+      font-family: var(--font-serif);
+      font-size: 1.28rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Key Facts Bar */
+    .facts-ribbon {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 3.2rem;
+      background: var(--kiln-umber);
+      color: var(--clay-cream);
+      border: 1px solid var(--kiln-umber);
+    }
+    .fact-cell {
+      padding: 1.65rem;
+      border-left: 1px solid var(--border-dark);
+    }
+    .fact-cell:first-child { border-left: none; }
+    .fact-cell strong {
+      font-family: var(--font-serif);
+      font-size: 2.15rem;
+      color: var(--engobe-gold-light);
+      display: block;
+      line-height: 1.05;
+      margin-bottom: 0.35rem;
+      font-weight: 500;
+    }
+    .fact-cell span {
+      font-size: 0.82rem;
+      color: rgba(244, 238, 227, 0.82);
+      line-height: 1.45;
+      display: block;
+    }
+
+    /* Career & Timeline Section */
+    .bio-section {
+      background: var(--clay-cream);
+    }
+    .career-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .career-prose h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.1rem, 3.8vw, 3.1rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      color: var(--kiln-umber);
+    }
+    .career-prose h2 em {
+      color: var(--oxide-rust);
+      font-style: italic;
+    }
+    .career-prose p {
+      margin-bottom: 1.15rem;
+      font-size: 1.02rem;
+      color: var(--kiln-ash);
+    }
+    .work-pillars {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.75rem;
+    }
+    .pillar-item {
+      background: var(--clay-surface);
+      border: 1px solid var(--border-clay);
+      border-left: 3px solid var(--oxide-rust);
+      padding: 1.1rem 1.35rem;
+    }
+    .pillar-item h4 {
+      font-family: var(--font-serif);
+      font-size: 1.28rem;
+      color: var(--kiln-umber);
+      margin-bottom: 0.25rem;
+    }
+    .pillar-item p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .timeline-list {
+      border-top: 2px solid var(--oxide-rust);
+      background: var(--clay-surface);
+      padding: 1.5rem 2rem;
+      box-shadow: var(--shadow-ceramic);
+    }
+    .timeline-step {
+      padding: 1.05rem 0;
+      border-bottom: 1px solid var(--border-clay);
+    }
+    .timeline-step:last-child { border-bottom: none; }
+    .timeline-year {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--oxide-rust);
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+    .timeline-step h4 {
+      font-family: var(--font-serif);
+      font-size: 1.32rem;
+      color: var(--kiln-umber);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-step p {
+      font-size: 0.88rem;
+      color: var(--kiln-ash);
+      line-height: 1.5;
+    }
+
+    /* Salt-Kiln Dark Section: Exhibitions & Where Her Works Are Located */
+    .bio-section-dark {
+      background-color: var(--kiln-umber);
+      color: var(--clay-cream);
+      border-top: 1px solid var(--border-clay);
+      border-bottom: 1px solid var(--border-clay);
+    }
+    .bio-section-dark .eyebrow { color: var(--engobe-gold-light); }
+    .bio-section-dark h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.1rem, 3.6vw, 3rem);
+      font-weight: 400;
+      color: var(--clay-cream);
+      margin-bottom: 1.5rem;
+    }
+    .bio-section-dark h2 em {
+      color: var(--engobe-gold-light);
+      font-style: italic;
+    }
+
+    .exhibition-locations-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.25rem;
+    }
+    .exhibition-list {
+      list-style: none;
+      border-top: 1px solid var(--border-dark);
+    }
+    .exhibition-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .exh-title {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--clay-cream);
+    }
+    .exh-note {
+      display: block;
+      font-size: 0.8rem;
+      color: rgba(244, 238, 227, 0.65);
+    }
+    .exh-place {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--engobe-gold-light);
+      white-space: nowrap;
+    }
+
+    .locations-cards {
+      display: grid;
+      gap: 1rem;
+    }
+    .location-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-dark);
+      border-left: 3px solid var(--oxide-terracotta);
+      padding: 1.25rem 1.45rem;
+    }
+    .loc-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--engobe-gold-light);
+      margin-bottom: 0.25rem;
+    }
+    .location-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.38rem;
+      color: var(--clay-cream);
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+    }
+    .location-card p {
+      font-size: 0.88rem;
+      color: rgba(244, 238, 227, 0.8);
+      line-height: 1.55;
+    }
+
+    /* Studio & Work Groups Section */
+    .studio-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .studio-pair .artist-card img { height: 340px; }
+
+    /* High-Visibility Monumental Footer with Terracotta Banner & 4 Contact Cards */
+    footer.atelier-footer {
+      background: #14100d;
+      color: var(--clay-cream);
+      padding: 0 0 3.2rem;
+      border-top: 3px solid var(--engobe-gold-light);
+      position: relative;
+    }
+    .footer-top-ribbon {
+      background: linear-gradient(135deg, #96431e 0%, #743012 100%);
+      border-bottom: 2px solid var(--engobe-gold-light);
+      padding: 1.85rem 0;
+      margin-bottom: 3.5rem;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+    }
+    .footer-ribbon-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-ribbon-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+    }
+    .footer-ribbon-brand img {
+      width: 58px;
+      height: 58px;
+      border-radius: 12px;
+      border: 1.5px solid var(--engobe-gold-light);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+    .footer-ribbon-brand h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .footer-ribbon-brand span {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f7dfc2;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+    .footer-ribbon-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+    .ribbon-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.3rem;
+      background: rgba(22, 21, 19, 0.88);
+      border: 1px solid var(--engobe-gold-light);
+      color: var(--clay-cream);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .ribbon-pill:hover {
+      background: var(--engobe-gold-light);
+      color: #161513;
+      transform: translateY(-2px);
+    }
+
+    /* 4 Prominent Contact Showcase Cards */
+    .footer-contact-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.35rem;
+      margin-bottom: 3.5rem;
+    }
+    .contact-highlight-card {
+      background: linear-gradient(180deg, rgba(44, 35, 29, 0.95) 0%, rgba(28, 22, 18, 0.95) 100%);
+      border: 1px solid rgba(191, 165, 113, 0.42);
+      border-top: 3px solid var(--engobe-gold-light);
+      padding: 1.55rem 1.4rem;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .contact-highlight-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--engobe-gold-light);
+    }
+    .contact-card-kicker {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--engobe-gold-light);
+      font-weight: 600;
+      margin-bottom: 0.45rem;
+    }
+    .contact-card-value {
+      font-family: var(--font-serif);
+      font-size: 1.42rem;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.25;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+    .contact-card-value a {
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(191, 165, 113, 0.55);
+      transition: color 0.2s;
+    }
+    .contact-card-value a:hover {
+      color: var(--engobe-gold-light);
+    }
+    .contact-card-sub {
+      font-size: 0.8rem;
+      color: rgba(244, 238, 227, 0.72);
+      line-height: 1.45;
+      display: block;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border-dark);
+      align-items: start;
+    }
+    .contact-table {
+      margin: 1.4rem 0;
+      border-top: 1px solid var(--border-dark);
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border-dark);
+      font-size: 0.95rem;
+    }
+    .contact-row dt {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--engobe-gold-light);
+      padding-top: 0.2rem;
+      font-weight: 600;
+    }
+    .contact-row dd a {
+      color: var(--clay-cream);
+      text-decoration: none;
+      border-bottom: 1px solid var(--engobe-gold-light);
+    }
+    .contact-row dd a:hover { color: var(--engobe-gold-light); }
+
+    .footer-form-card {
+      background: rgba(38, 30, 25, 0.85);
+      border: 1px solid rgba(191, 165, 113, 0.42);
+      border-left: 4px solid var(--oxide-rust);
+      padding: 2.25rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--engobe-gold-light);
+      margin-bottom: 0.25rem;
+    }
+    .hint {
+      display: block;
+      font-size: 0.72rem;
+      color: rgba(244, 238, 227, 0.55);
+      margin-bottom: 0.3rem;
+    }
+    .field input, .field textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-dark);
+      color: var(--clay-cream);
+      padding: 0.75rem 0.9rem;
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .error-msg {
+      display: none;
+      color: #ff8b7b;
+      font-size: 0.75rem;
+      margin-top: 0.3rem;
+    }
+    input:user-invalid, textarea:user-invalid,
+    input.user-invalid-fallback, textarea.user-invalid-fallback {
+      border-color: #e06c60;
+      background-color: rgba(224, 108, 96, 0.12);
+    }
+    input:user-invalid + .error-msg, textarea:user-invalid + .error-msg,
+    input.user-invalid-fallback + .error-msg, textarea.user-invalid-fallback + .error-msg {
+      display: block;
+    }
+    input:user-valid, textarea:user-valid,
+    input.user-valid-fallback, textarea.user-valid-fallback {
+      border-color: #79b487;
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: rgba(244, 238, 227, 0.6);
+    }
+    .footer-bottom a {
+      color: rgba(244, 238, 227, 0.75);
+      text-decoration: none;
+      margin-left: 1.5rem;
+    }
+    .footer-bottom a:hover { color: var(--engobe-gold-light); }
+
+    @media (max-width: 920px) {
+      .subpage-header { padding: 1rem 1.5rem; }
+      .artist-triptych, .career-grid, .exhibition-locations-grid, .studio-pair, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .facts-ribbon, .footer-contact-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .facts-ribbon, .footer-contact-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="subpage-header">
+    <a href="index.html" class="brand-lockup" aria-label="Atelier Fassbinder — Zurück zum 3D-Museum">
+      <span class="brand-logo-badge" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+          <rect width="120" height="120" rx="14" fill="#161513"/>
+          <path
+            d="M 26.5 97.5 C 26.5 90, 27.2 84, 26.2 76 C 25.2 68, 28.4 61, 29.4 53 C 30.2 47, 29.8 44, 28.5 39 C 27.4 33.5, 30.5 29.5, 35.6 29.5 C 40.5 29.5, 42.2 33.8, 41.2 39 C 40.2 44, 39.5 46.5, 40.8 52 C 42.0 57, 41.2 64, 41.5 70 C 41.8 76, 43.8 81, 44.3 88 C 44.7 92.5, 44.8 95.5, 45.2 97.5 Z"
+            fill="#ddd7c8"
+          />
+          <path
+            class="stele-center"
+            d="M 52.5 97.5 C 52.6 91, 52.4 85, 53.6 79 C 54.8 73, 55.6 69, 55.0 62 C 54.4 55, 56.0 50, 55.6 44 C 55.2 38, 53.6 34, 54.5 29 C 55.5 24, 59.5 22.2, 64.2 22.5 C 69.5 22.8, 73.5 26.5, 72.8 32 C 72.0 37.5, 69.4 40.5, 69.8 45.5 C 70.2 50.5, 72.0 54, 71.6 59 C 71.2 63.5, 74.2 68, 74.4 73.5 C 74.6 79, 73.6 82.5, 74.8 88 C 75.8 92.5, 76.4 95.5, 77.0 97.5 Z"
+            fill="#a36841"
+          />
+          <path
+            d="M 80.6 97.5 C 81.2 92, 82.2 86, 82.2 79 C 82.2 72, 81.8 66, 83.2 61.5 C 84.4 57.8, 84.4 55.5, 83.0 51.5 C 81.6 47.5, 83.2 41.2, 88.2 41.2 C 93.2 41.2, 94.8 47.5, 93.2 51.5 C 91.6 55.5, 91.6 57.8, 93.0 61.5 C 94.4 65.5, 93.8 72, 93.8 79 C 93.8 86, 94.8 92, 95.6 97.5 Z"
+            fill="#ddd7c8"
+          />
+          <rect x="16.8" y="99" width="86.4" height="4.4" rx="0.8" fill="#bfa571"/>
+        </svg>
+      </span>
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-text">
+        <span class="brand-title">Atelier Fassbinder</span>
+        <span class="brand-sub">Ingrid Schmitt-Fassbinder · Keramik · Plastik · Trier</span>
+      </span>
+    </a>
+    <nav class="subpage-nav" aria-label="Biografie-Navigation">
+      <a href="#portraet">Porträt &amp; Fotos</a>
+      <a href="#karriere">Werdegang &amp; Werk</a>
+      <a href="#ausstellungen">Ausstellungen</a>
+      <a href="#standorte">Standorte der Werke</a>
+      <a href="#kontakt">Kontakt im Footer</a>
+      <a href="index.html" class="btn-back-3d">← 3D-Museum (Matterport Tour)</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. HERO & ARTIST PHOTOGRAPHS TRIPTYCH -->
+    <section id="portraet" class="bio-hero">
+      <div class="container">
+        <span class="eyebrow">Künstlerbiografie · Monografisches Dossier</span>
+        <h1>Ingrid <em>Schmitt-Fassbinder</em></h1>
+        <p class="hero-quote">
+          „Aus Ton, Schamotte, Eisenoxiden und dem hochgebrannten Feuer des Salzofens entstehen archaische Figuren, Reliefs und baugebundene Plastiken — zwischen stiller Kontemplation und expressiver Körperlichkeit."
+        </p>
+
+        <div class="artist-triptych">
+          <figure class="artist-card">
+            <img id="bio-img-portrait" alt="Schwarz-Weiß-Porträt der Künstlerin Ingrid Schmitt-Fassbinder im Atelier" />
+            <figcaption>
+              <span class="caption-tag">Atelierporträt · Trier</span>
+              <h4>Ingrid Schmitt-Fassbinder</h4>
+              <p>Keramikerin, Bildhauerin und Malerin in ihrem Trierer Atelier (Heinrich-Brauns-Str. 6).</p>
+            </figcaption>
+          </figure>
+
+          <figure class="artist-card">
+            <img id="bio-img-photo47" alt="Porträt der Künstlerin mit rotem Haar, Kappe und roter Bemalung im Gesicht (Foto 47)" />
+            <figcaption>
+              <span class="caption-tag">Künstlerporträt · Archiv Nr. 47</span>
+              <h4>Performance- &amp; Atelierporträt</h4>
+              <p>Ausdrucksstarkes Porträt der Künstlerin mit charakteristischer Kappe und roter Engobe-/Farbinszenierung.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="artist-card">
+            <img id="bio-img-stele" alt="Ingrid Schmitt-Fassbinder neben einer ihrer hochformatigen Keramikstelen" />
+            <figcaption>
+              <span class="caption-tag">Im Dialog mit dem Werk</span>
+              <h4>Künstlerin mit Großplastik</h4>
+              <p>Ingrid Schmitt-Fassbinder neben einer ihrer lebensgroßen, mehrteilig aufgebauten Keramikfiguren.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="facts-ribbon">
+          <div class="fact-cell">
+            <strong>1975</strong>
+            <span>Beginn als freischaffende Künstlerin im In- und Ausland</span>
+          </div>
+          <div class="fact-cell">
+            <strong>1977</strong>
+            <span>Gründungsmitglied der Europäischen Kunst Akademie (EKA) Trier</span>
+          </div>
+          <div class="fact-cell">
+            <strong>36 Jahre</strong>
+            <span>Dozentin in Deutschland, Österreich, Ungarn, Frankreich &amp; Kanada</span>
+          </div>
+          <div class="fact-cell">
+            <strong>Kunst am Bau</strong>
+            <span>Preisträgerin öffentlicher Wettbewerbe &amp; Großprojekte</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CAREER, WORK PILLARS & TIMELINE -->
+    <section id="karriere" class="bio-section">
+      <div class="container">
+        <div class="career-grid">
+          <div class="career-prose">
+            <span class="eyebrow">Künstlerischer Werdegang &amp; Materialästhetik</span>
+            <h2>Vier Jahrzehnte zwischen <em>Schamotteton, Oxid &amp; Salzbrand</em></h2>
+            <p>
+              Seit <strong>1975</strong> arbeitet Ingrid Schmitt-Fassbinder als freischaffende Künstlerin im In- und Ausland. In ihrem Trierer Atelier entstehen freistehende keramische Skulpturen, expressive Köpfe, mehrteilige Stelen sowie großformatige Wandreliefs, deren erdige Farbpalette unmittelbar aus grobkörnigem Schamotteton, rotbraunen Eisenoxiden, Mangan-Engoben und der feurigen Salzglasur erwächst.
+            </p>
+            <p>
+              Im Jahr <strong>1977</strong> gehörte sie zu den Gründungsmitgliedern der renommierten <strong>Europäischen Kunst Akademie (EKA) in Trier</strong>. Über einen Zeitraum von <strong>36 Jahren</strong> prägte sie als Dozentin Generationen von Kunstschaffenden — nicht nur an der EKA Trier, sondern auch an Sommerakademien und Kunsthochschulen in Deutschland, Österreich, Ungarn, Frankreich und Kanada.
+            </p>
+
+            <div class="work-pillars">
+              <div class="pillar-item">
+                <h4>I. Figuren &amp; Plastiken (48 katalogisierte Hauptwerke)</h4>
+                <p>Menschliche Torsi, Wächterfiguren, Stelen und charaktervolle Porträtköpfe im Spannungsfeld von Verletzlichkeit, Würde und archaischer Präsenz.</p>
+              </div>
+              <div class="pillar-item">
+                <h4>II. Reliefs &amp; Wandarbeiten (18 Werkgruppen)</h4>
+                <p>Schichtungen aus gebranntem Ton, grafischen Ritzungen, Engoben und malerischen Glasurverläufen an der Schnittstelle von Skulptur und Malerei.</p>
+              </div>
+              <div class="pillar-item">
+                <h4>III. Kunst am Bau &amp; Außenraum (18 Architekturarbeiten)</h4>
+                <p>Witterungsbeständige, hochgebrannte Großkeramiken, Brunnenanlagen, Säulen und Wandgestaltungen für öffentliche Gebäude, Schulen und Gärten.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <span class="eyebrow">Chronologie</span>
+            <h2 style="font-family:var(--font-serif); font-size:2rem; font-weight:400; margin:0.4rem 0 1.5rem;">Stationen der <em>Laufbahn</em></h2>
+            <div class="timeline-list">
+              <div class="timeline-step">
+                <span class="timeline-year">Seit 1975</span>
+                <h4>Freischaffende Künstlerin im In- und Ausland</h4>
+                <p>Gründung des eigenen Ateliers in Trier; kontinuierliche bildhauerische und keramische Werkentwicklung sowie internationale Ausstellungstätigkeit.</p>
+              </div>
+              <div class="timeline-step">
+                <span class="timeline-year">1977</span>
+                <h4>Gründungsmitglied der Europäischen Kunst Akademie (EKA) Trier</h4>
+                <p>Maßgebliche Beteiligung am Aufbau einer der bedeutendsten freien Kunstakademien im europäischen Raum.</p>
+              </div>
+              <div class="timeline-step">
+                <span class="timeline-year">36 Jahre Lehrtätigkeit</span>
+                <h4>Internationale Dozentur in Europa &amp; Nordamerika</h4>
+                <p>Lehraufträge für plastisches Gestalten und Keramik an der EKA Trier sowie an Akademien in Deutschland, Österreich, Ungarn, Frankreich und Kanada.</p>
+              </div>
+              <div class="timeline-step">
+                <span class="timeline-year">Auszeichnungen</span>
+                <h4>Preisträgerin öffentlicher Wettbewerbe</h4>
+                <p>Mehrfache Auszeichnungen bei Wettbewerben für Kunst im öffentlichen Raum und Realisierung großformatiger Kunst-am-Bau-Aufträge.</p>
+              </div>
+              <div class="timeline-step">
+                <span class="timeline-year">Heute</span>
+                <h4>Atelier Fassbinder · Trier</h4>
+                <p>Ständige Werkpräsentation in Atelier und Skulpturengarten in der Heinrich-Brauns-Str. 6 in Trier sowie im virtuellen 3D-Museum.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="studio-pair">
+          <figure class="artist-card">
+            <img id="bio-img-worktable" alt="Einblick in das Atelier Fassbinder mit Werkbank und Keramikskulpturen" />
+            <figcaption>
+              <span class="caption-tag">Werkstatt &amp; Entstehung</span>
+              <h4>Blick in das Trierer Atelier</h4>
+              <p>Arbeitstisch mit im Aufbau befindlichen Tonplastiken, Werkzeugen, Oxiden und gebrannten Werkstücken.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="artist-card">
+            <img id="bio-img-exhibition" alt="Ausstellungsansicht mit Stelen und Keramikskulpturen von Ingrid Schmitt-Fassbinder" />
+            <figcaption>
+              <span class="caption-tag">Werkschau &amp; Raumwirkung</span>
+              <h4>Ausstellungsansicht</h4>
+              <p>Präsentation mehrteiliger Stelen, Büsten und Reliefarbeiten im architektonischen Ausstellungsraum.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. EXHIBITIONS & LOCATIONS OF HER WORKS -->
+    <section class="bio-section-dark">
+      <div class="container">
+        <div class="exhibition-locations-grid">
+          <!-- International Exhibitions -->
+          <div id="ausstellungen">
+            <span class="eyebrow">Internationale Präsenz</span>
+            <h2>Ausstellungen <em>(Auswahl)</em></h2>
+            <ul class="exhibition-list">
+              <li>
+                <div>
+                  <span class="exh-title">Europäische Kunst Akademie (EKA)</span>
+                  <span class="exh-note">Einzel- und Gruppenausstellungen der Dozenten</span>
+                </div>
+                <span class="exh-place">Trier · Deutschland</span>
+              </li>
+              <li>
+                <div>
+                  <span class="exh-title">Concorso Internazionale della Ceramica d'Arte</span>
+                  <span class="exh-note">Internationale Biennale für zeitgenössische Keramikkunst</span>
+                </div>
+                <span class="exh-place">Faenza · Italien</span>
+              </li>
+              <li>
+                <div>
+                  <span class="exh-title">Salon de Printemps</span>
+                  <span class="exh-note">Große Frühjahrsausstellung zeitgenössischer Kunst</span>
+                </div>
+                <span class="exh-place">Luxemburg</span>
+              </li>
+              <li>
+                <div>
+                  <span class="exh-title">Salzbrand — Keramikmuseum Westerwald</span>
+                  <span class="exh-note">Internationale Werkschau zur Salzglasur-Keramik</span>
+                </div>
+                <span class="exh-place">Höhr-Grenzhausen</span>
+              </li>
+              <li>
+                <div>
+                  <span class="exh-title">Europa der Keramiker</span>
+                  <span class="exh-note">Europäische Wanderausstellung keramischer Plastik</span>
+                </div>
+                <span class="exh-place">FR · ES · AT · HU</span>
+              </li>
+              <li>
+                <div>
+                  <span class="exh-title">Salzglasur — Kurfürstliches Schloss</span>
+                  <span class="exh-note">Ausstellung zeitgenössischer Salzbrand-Plastik</span>
+                </div>
+                <span class="exh-place">Koblenz · Deutschland</span>
+              </li>
+              <li>
+                <div>
+                  <span class="exh-title">Casa-Museu Teixeira Lopes</span>
+                  <span class="exh-note">Internationale Bildhauer- und Keramikausstellung</span>
+                </div>
+                <span class="exh-place">Vila Nova de Gaia · Portugal</span>
+              </li>
+              <li>
+                <div>
+                  <span class="exh-title">National Museum of Fine Arts</span>
+                  <span class="exh-note">Internationale Keramik-Ausstellung in Ostasien</span>
+                </div>
+                <span class="exh-place">Taipeh · Taiwan</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Where Her Works Are Located -->
+          <div id="standorte">
+            <span class="eyebrow">Werkstandorte &amp; Sammlungen</span>
+            <h2>Wo sich ihre <em>Werke befinden</em></h2>
+
+            <div class="locations-cards">
+              <div class="location-card">
+                <span class="loc-badge">Kunst am Bau · Öffentlicher Raum</span>
+                <h4>Schulen in Niederahr &amp; Herschbach (Westerwald)</h4>
+                <p>Großformatige, dauerhaft installierte keramische Wandgestaltungen, Reliefzyklen und architekturbezogene Plastiken im Rahmen gewonnener Kunst-am-Bau-Wettbewerbe an öffentlichen Schulen in Niederahr und Herschbach.</p>
+              </div>
+
+              <div class="location-card">
+                <span class="loc-badge">Museen &amp; Institutionen</span>
+                <h4>Öffentliche Sammlungen im In- und Ausland</h4>
+                <p>Ankäufe und Werkbestände in öffentlichen Kunstsammlungen, kommunalen Kulturinstitutionen und Keramikmuseen in Europa und Asien.</p>
+              </div>
+
+              <div class="location-card">
+                <span class="loc-badge">Privatsammlungen</span>
+                <h4>Internationale Private Kunstsammlungen</h4>
+                <p>Zahlreiche freistehende Figuren, Köpfe, Stelen und Gartenskulpturen befinden sich in privaten Sammlungen in Deutschland, Luxemburg, Frankreich, Österreich, der Schweiz und Kanada.</p>
+              </div>
+
+              <div class="location-card">
+                <span class="loc-badge">Ständige Werkschau · Trier</span>
+                <h4>Atelier &amp; Skulpturengarten Trier</h4>
+                <p>Eine umfangreiche Auswahl aus allen Schaffensphasen (Figuren, Reliefs und Gartenkeramik) ist im Original im <strong>Atelier Fassbinder, Heinrich-Brauns-Str. 6 in D-54296 Trier</strong> nach Vereinbarung zu besichtigen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 4. HIGH-VISIBILITY MONUMENTAL FOOTER WITH TERRACOTTA BANNER & 4 CONTACT CARDS -->
+  <footer id="kontakt" class="atelier-footer">
+    <!-- Top Terracotta & Burnished Gold Callout Banner -->
+    <div class="footer-top-ribbon">
+      <div class="container footer-ribbon-inner">
+        <div class="footer-ribbon-brand">
+          <img src="logo-favicon.svg" alt="" aria-hidden="true" width="58" height="58" />
+          <div>
+            <span>Direktkontakt · Atelier &amp; Skulpturengarten Trier</span>
+            <h2>Atelier Fassbinder — Ingrid Schmitt-Fassbinder</h2>
+          </div>
+        </div>
+        <div class="footer-ribbon-actions">
+          <a href="tel:+496519948335" class="ribbon-pill">📞 0651 – 994 83 35</a>
+          <a href="tel:+4915122441122" class="ribbon-pill">📱 0151 – 2244 1122</a>
+          <a href="mailto:info@atelier-fassbinder.de" class="ribbon-pill">✉️ info@atelier-fassbinder.de</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- 4 High-Contrast Contact Showcase Cards -->
+      <div class="footer-contact-cards">
+        <div class="contact-highlight-card">
+          <span class="contact-card-kicker">📍 Anschrift · Atelier Trier</span>
+          <strong class="contact-card-value">Heinrich-Brauns-Str. 6<br>D-54296 Trier</strong>
+          <span class="contact-card-sub">Atelier Fassbinder · Keramik, Plastik &amp; Skulpturengarten</span>
+        </div>
+
+        <div class="contact-highlight-card">
+          <span class="contact-card-kicker">📞 Telefon · Festnetz</span>
+          <strong class="contact-card-value"><a href="tel:+496519948335">0651 – 994 83 35</a></strong>
+          <span class="contact-card-sub">Direkter Kontakt ins Trierer Atelier</span>
+        </div>
+
+        <div class="contact-highlight-card">
+          <span class="contact-card-kicker">📱 Mobil · Direkt</span>
+          <strong class="contact-card-value"><a href="tel:+4915122441122">0151 – 2244 1122</a></strong>
+          <span class="contact-card-sub">Für kurzfristige Terminabsprachen</span>
+        </div>
+
+        <div class="contact-highlight-card">
+          <span class="contact-card-kicker">✉️ E-Mail &amp; Besuche</span>
+          <strong class="contact-card-value"><a href="mailto:info@atelier-fassbinder.de">info@atelier-fassbinder.de</a></strong>
+          <span class="contact-card-sub">Besuche jederzeit nach Vereinbarung</span>
+        </div>
+      </div>
+
+      <div class="footer-grid">
+        <div>
+          <span class="eyebrow" style="color:var(--engobe-gold-light);">Persönliche Werkbesichtigung vor Ort</span>
+          <h3 style="font-family:var(--font-serif); font-size:2.2rem; font-weight:400; margin:0.3rem 0 0.85rem; color:#fff;">
+            „Meine Werke können Sie jederzeit nach Vereinbarung in meinem Atelier besichtigen.“
+          </h3>
+          <p style="color:rgba(244,238,227,0.82); font-size:0.96rem; max-width:54ch; margin-bottom:1.4rem;">
+            Im Trierer Atelier und dem angrenzenden Skulpturengarten erleben Sie die Oberflächen, Glasurverläufe und Maßstäbe der Salzbrand-Unikate, Stelen und Wandreliefs im Original.
+          </p>
+
+          <dl class="contact-table">
+            <div class="contact-row">
+              <dt>Atelier</dt>
+              <dd>Atelier Fassbinder · Ingrid Schmitt-Fassbinder</dd>
+            </div>
+            <div class="contact-row">
+              <dt>Adresse</dt>
+              <dd>Heinrich-Brauns-Str. 6 · D-54296 Trier (Deutschland)</dd>
+            </div>
+            <div class="contact-row">
+              <dt>Telefon / Mobil</dt>
+              <dd><a href="tel:+496519948335">0651 – 994 83 35</a> &nbsp;·&nbsp; <a href="tel:+4915122441122">0151 – 2244 1122</a></dd>
+            </div>
+            <div class="contact-row">
+              <dt>E-Mail</dt>
+              <dd><a href="mailto:info@atelier-fassbinder.de">info@atelier-fassbinder.de</a></dd>
+            </div>
+            <div class="contact-row">
+              <dt>Öffnungszeiten</dt>
+              <dd>Jederzeit nach persönlicher Vereinbarung</dd>
+            </div>
+          </dl>
+
+          <a href="index.html" class="btn-back-3d" style="margin-top:0.6rem;">
+            ← Zurück zum 3D-Museum (Alle 93 Werke im Raum)
+          </a>
+        </div>
+
+        <div class="footer-form-card">
+          <span class="eyebrow" style="color:var(--engobe-gold-light);">Private Inquiry · Werkanfrage</span>
+          <h3 style="font-family:var(--font-serif); font-size:1.65rem; font-weight:400; margin:0.2rem 0 1.2rem; color:#fff;">Termin- oder Werkanfrage senden</h3>
+          <form id="bio-inquiry-form">
+            <div class="field">
+              <label for="inq-name">Ihr Name *</label>
+              <span class="hint">Bitte geben Sie Ihren vollständigen Namen an (mind. 2 Zeichen)</span>
+              <input type="text" id="inq-name" name="name" required minlength="2" placeholder="Dr. Clara von Stein" />
+              <span class="error-msg">Bitte geben Sie Ihren Namen ein.</span>
+            </div>
+            <div class="field">
+              <label for="inq-email">E-Mail-Adresse *</label>
+              <span class="hint">Für die persönliche Rückmeldung aus dem Atelier</span>
+              <input type="email" id="inq-email" name="email" required placeholder="name@beispiel.de" />
+              <span class="error-msg">Bitte geben Sie eine gültige E-Mail-Adresse ein.</span>
+            </div>
+            <div class="field">
+              <label for="inq-message">Nachricht / Werkinteresse *</label>
+              <span class="hint">Anfrage zu Atelierbesuch, Verfügbarkeit oder Auftragswerk (mind. 10 Zeichen)</span>
+              <textarea id="inq-message" name="message" rows="3" required minlength="10" placeholder="Ich interessiere mich für einen Atelierbesuch in Trier..."></textarea>
+              <span class="error-msg">Bitte formulieren Sie eine kurze Nachricht (mindestens 10 Zeichen).</span>
+            </div>
+            <button type="submit" class="btn-back-3d" style="width:100%; border:none; cursor:pointer; padding:0.9rem; font-family:var(--font-sans); justify-content:center;">
+              Anfrage an info@atelier-fassbinder.de senden
+            </button>
+            <p id="bio-form-feedback" style="display:none; margin-top:0.85rem; color:#9cd6a8; font-size:0.85rem;">
+              Vielen Dank! Ihr E-Mail-Programm wird mit Ihrer Anfrage an info@atelier-fassbinder.de geöffnet.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© Atelier Fassbinder · Ingrid Schmitt-Fassbinder · Heinrich-Brauns-Str. 6, D-54296 Trier</div>
+        <div>
+          <a href="index.html">3D-Museum (Matterport Tour)</a>
+          <a href="#impressum" id="open-impressum">Impressum</a>
+          <a href="#datenschutz" id="open-datenschutz">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- IMPRESSUM / DATENSCHUTZ DIALOG -->
+  <dialog id="legal-dialog" closedby="any" style="max-width:640px; width:90vw; border:1px solid var(--border-clay); background:var(--clay-cream); color:var(--kiln-dark); padding:2.2rem; font-family:var(--font-sans);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <span class="eyebrow">Rechtliche Angaben</span>
+      <button type="button" id="close-legal" style="background:none; border:1px solid var(--border-clay); padding:0.35rem 0.75rem; cursor:pointer; font-size:0.75rem;">Schließen ✕</button>
+    </div>
+    <h3 style="font-family:var(--font-serif); font-size:1.75rem; margin-top:0;">Impressum &amp; Datenschutz</h3>
+    <p style="font-size:0.9rem; line-height:1.65;">
+      <strong>Ingrid Schmitt-Fassbinder</strong><br>
+      Atelier Fassbinder · Heinrich-Brauns-Str. 6 · D-54296 Trier<br>
+      Telefon: 0651 – 994 83 35 · Mobil: 0151 – 2244 1122<br>
+      E-Mail: <a href="mailto:info@atelier-fassbinder.de">info@atelier-fassbinder.de</a>
+    </p>
+    <p style="font-size:0.85rem; color:var(--ash-taupe); line-height:1.6;">
+      Alle Rechte an den Fotografien und abgebildeten Kunstwerken liegen bei Ingrid Schmitt-Fassbinder. Personenbezogene Daten aus Kontaktanfragen werden ausschließlich zur Beantwortung Ihres Anliegens verwendet.
+    </p>
+  </dialog>
+
+  <script src="atelier-data.js"></script>
+  <script>
+    // Populate all artist & studio photographs from atelier-data.js
+    (function initBiographyAssets() {
+      const assets = window.ATELIER_ASSETS || {};
+      const photo47 = window.ATELIER_PHOTO_47 || {};
+
+      const bindImg = (id, src) => {
+        const el = document.getElementById(id);
+        if (el && src) el.src = src;
+      };
+
+      bindImg('bio-img-portrait', assets.portrait_bw);
+      bindImg('bio-img-photo47', photo47.img);
+      bindImg('bio-img-stele', assets.artist_with_stele);
+      bindImg('bio-img-worktable', assets.atelier_worktable);
+      bindImg('bio-img-exhibition', assets.exhibition_view);
+    })();
+
+    // Dialog Light Dismiss fallback for browsers without native closedby="any"
+    function enableDialogLightDismiss(dialog) {
+      if (!dialog || 'closedBy' in HTMLDialogElement.prototype) return;
+      dialog.addEventListener('click', (event) => {
+        const rect = dialog.getBoundingClientRect();
+        const clickedInDialog =
+          event.clientX >= rect.left &&
+          event.clientX <= rect.right &&
+          event.clientY >= rect.top &&
+          event.clientY <= rect.bottom;
+        if (!clickedInDialog) dialog.close();
+      });
+    }
+
+    const legalDialog = document.getElementById('legal-dialog');
+    enableDialogLightDismiss(legalDialog);
+    document.getElementById('open-impressum').addEventListener('click', (e) => {
+      e.preventDefault();
+      legalDialog.showModal();
+    });
+    document.getElementById('open-datenschutz').addEventListener('click', (e) => {
+      e.preventDefault();
+      legalDialog.showModal();
+    });
+    document.getElementById('close-legal').addEventListener('click', () => legalDialog.close());
+
+    // Form validation fallback for :user-invalid / :user-valid
+    class UserInvalidFallback {
+      constructor(form) {
+        if (!form) return;
+        this.form = form;
+        let supportsUserInvalid = false;
+        try {
+          supportsUserInvalid = CSS.supports('selector(:user-invalid)');
+        } catch (_) {}
+        if (!supportsUserInvalid) {
+          this.initFallback();
+        }
+      }
+      initFallback() {
+        const inputs = this.form.querySelectorAll('input, textarea');
+        inputs.forEach((input) => {
+          input.addEventListener('blur', () => {
+            if (input.value.trim() !== '') this.validateInput(input);
+          });
+          input.addEventListener('input', () => {
+            if (input.classList.contains('user-invalid-fallback')) {
+              this.validateInput(input);
+            }
+          });
+        });
+      }
+      validateInput(input) {
+        if (input.checkValidity()) {
+          input.classList.remove('user-invalid-fallback');
+          input.classList.add('user-valid-fallback');
+        } else {
+          input.classList.remove('user-valid-fallback');
+          input.classList.add('user-invalid-fallback');
+        }
+      }
+    }
+
+    const bioForm = document.getElementById('bio-inquiry-form');
+    new UserInvalidFallback(bioForm);
+    bioForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!bioForm.checkValidity()) return;
+      const name = document.getElementById('inq-name').value.trim();
+      const email = document.getElementById('inq-email').value.trim();
+      const msg = document.getElementById('inq-message').value.trim();
+      document.getElementById('bio-form-feedback').style.display = 'block';
+      const subject = encodeURIComponent(`Anfrage über Atelier Fassbinder — ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nE-Mail: ${email}\n\nNachricht:\n${msg}`);
+      window.location.href = `mailto:info@atelier-fassbinder.de?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
