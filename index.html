@@ -50,9 +50,11 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       z-index: 2;
       display: block;
       cursor: grab;
+      touch-action: none;
     }
     #webgl-canvas:active { cursor: grabbing; }
 
@@ -741,13 +743,164 @@
       border: 1px solid var(--accent-gold-soft);
     }
 
+    .mobile-walk-controls {
+      display: none;
+      pointer-events: auto;
+      gap: 0.45rem;
+      margin-bottom: 0.35rem;
+    }
+    .mobile-walk-btn {
+      background: rgba(201, 164, 78, 0.22);
+      border: 1px solid var(--accent-gold);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 0.5rem 0.85rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .mobile-walk-btn:active {
+      background: var(--accent-gold);
+      color: var(--bg-void);
+    }
+
     @media (max-width: 860px) {
-      .hud-header { padding: 1rem 1.2rem; }
+      .hud-header {
+        padding: 0.65rem 0.9rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.55rem;
+      }
+      .brand-mark .b-main { font-size: 1.05rem; letter-spacing: 0.14em; }
+      .brand-mark .b-sub { font-size: 0.56rem; letter-spacing: 0.14em; }
+      .hud-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem;
+        padding-bottom: 0.15rem;
+        scrollbar-width: none;
+      }
+      .hud-nav::-webkit-scrollbar { display: none; }
+      .hud-link {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.64rem;
+      }
+
+      #hero-overlay {
+        padding: 5.8rem 1.15rem 6.5rem;
+        overflow-y: auto;
+      }
+      .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+      .hero-title { font-size: clamp(1.9rem, 1rem + 5vw, 3.2rem); }
+      .hero-subtitle-name { font-size: 0.98rem; margin-bottom: 0.7rem; }
+      .hero-quote { font-size: 0.95rem; margin-bottom: 1.25rem; padding: 0 0.5rem; }
+      .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 340px;
+        gap: 0.6rem;
+        margin-bottom: 1rem;
+      }
+      .btn-luxury {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1.1rem;
+        font-size: 0.68rem;
+      }
+      .hero-artist-pill {
+        max-width: 340px;
+        width: 100%;
+        border-radius: 14px;
+        padding: 0.65rem 1rem !important;
+      }
+
+      .ovr-bottom-bar {
+        left: 0.65rem;
+        right: 0.65rem;
+        bottom: 0.65rem;
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+      .ovr-filter-chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0.35rem;
+      }
+      .ovr-filter-chips::-webkit-scrollbar { display: none; }
+      .ovr-chip {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 0.45rem 0.75rem;
+        font-size: 0.62rem;
+      }
+
+      .hud-coordinates {
+        align-self: flex-end;
+        padding: 0.45rem 0.65rem;
+        font-size: 0.58rem;
+      }
+      #floorplan-radar {
+        width: 64px;
+        height: 96px;
+      }
+      .desktop-hint-text { display: none; }
+      .mobile-walk-controls { display: flex; }
+
+      #artwork-hover-caption {
+        left: 0.65rem;
+        right: 0.65rem;
+        bottom: 4.4rem;
+        max-width: none;
+        padding: 0.75rem 1rem;
+      }
+      .caption-title { font-size: 1.15rem; }
+
+      /* Bottom-sheet Detail Drawer on Mobile */
+      #artwork-detail-panel {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        height: 74vh;
+        height: 74dvh;
+        border-left: none;
+        border-top: 2px solid var(--accent-gold);
+        border-radius: 16px 16px 0 0;
+        padding: 3.4rem 1.25rem 1.5rem;
+        transform: translateY(105%);
+      }
+      #artwork-detail-panel.is-open {
+        transform: translateY(0);
+      }
+
+      dialog.luxury-dialog {
+        width: calc(100vw - 1rem);
+        max-height: 92vh;
+        max-height: 92dvh;
+      }
+      .dialog-inner { padding: 1.25rem; }
       .dossier-grid { grid-template-columns: 1fr; }
-      .artist-photo-collage { grid-template-columns: 1fr; }
-      .ovr-bottom-bar { left: 1rem; right: 1rem; bottom: 1rem; }
-      #artwork-hover-caption { left: 1rem; right: 1rem; bottom: 7.5rem; }
-      .dialog-inner { padding: 1.5rem; }
+      .artist-photo-collage { grid-template-columns: 1fr !important; }
+      .catalog-grid-94 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.65rem;
+      }
+      .catalog-item img {
+        aspect-ratio: 4 / 5;
+        height: auto;
+      }
+      .field input, .field select, .field textarea {
+        font-size: 1rem; /* Prevents iOS Safari auto-zoom on focus */
+      }
     }
   </style>
 </head>
@@ -814,12 +967,16 @@
     </div>
 
     <div class="hud-coordinates" aria-hidden="true">
+      <div class="mobile-walk-controls">
+        <button type="button" class="mobile-walk-btn" id="mobile-step-fwd">▲ Avanzar</button>
+        <button type="button" class="mobile-walk-btn" id="mobile-step-bwd">▼ Atrás</button>
+      </div>
       <canvas id="floorplan-radar" width="92" height="140" title="Klicken zum Teleportieren im Grundriss" style="pointer-events:auto;cursor:pointer;border:1px solid rgba(201,164,78,0.4);margin-bottom:4px;"></canvas>
       <span id="z-coord-readout">Z-ACHSE // WERK 01 / 93</span>
       <div class="z-progress-bar">
         <div class="z-progress-fill" id="z-progress-fill"></div>
       </div>
-      <span>SCROLLEN ZUM FLIEGEN · KLICK AUF WERK FÜR DETAILS &amp; AR</span>
+      <span class="desktop-hint-text">SCROLLEN ZUM FLIEGEN · KLICK AUF WERK FÜR DETAILS &amp; AR</span>
     </div>
   </div>
 

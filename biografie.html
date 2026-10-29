@@ -722,14 +722,99 @@
     .footer-bottom a:hover { color: var(--engobe-gold-light); }
 
     @media (max-width: 920px) {
-      .subpage-header { padding: 1rem 1.5rem; }
+      .subpage-header {
+        padding: 0.7rem 1rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.65rem;
+      }
+      .brand-logo-badge { width: 42px; height: 42px; }
+      .brand-logo-badge svg { width: 36px; height: 36px; }
+      .brand-divider { height: 28px; }
+      .brand-title { font-size: 1.2rem; }
+      .brand-sub { font-size: 0.56rem; letter-spacing: 0.14em; }
+
+      .subpage-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1rem;
+        padding-bottom: 0.2rem;
+      }
+      .subpage-nav::-webkit-scrollbar { display: none; }
+      .subpage-nav a {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .btn-back-3d {
+        padding: 0.55rem 0.95rem;
+        font-size: 0.66rem;
+      }
+
+      section { padding: 2.8rem 0; }
+      .bio-hero { padding: 2.4rem 0 3rem; }
+      .bio-hero h1 { font-size: clamp(2.1rem, 1.2rem + 5vw, 3.4rem); }
+      .hero-quote { font-size: 1.15rem; padding-left: 1rem; margin-bottom: 2rem; }
+
       .artist-triptych, .career-grid, .exhibition-locations-grid, .studio-pair, .footer-grid {
         grid-template-columns: 1fr;
+        gap: 1.75rem;
       }
-      .facts-ribbon, .footer-contact-cards { grid-template-columns: 1fr 1fr; }
+      .artist-card img {
+        aspect-ratio: 4 / 5;
+        height: auto;
+        max-height: 420px;
+      }
+      .studio-pair .artist-card img {
+        aspect-ratio: 16 / 11;
+        height: auto;
+      }
+
+      .facts-ribbon, .footer-contact-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+      .fact-cell {
+        border-left: none;
+        border-bottom: 1px solid var(--border-dark);
+        padding: 1.25rem;
+      }
+      .timeline-list { padding: 1.2rem 1.25rem; }
+      .footer-form-card { padding: 1.45rem; }
+      .field input, .field textarea {
+        font-size: 1rem; /* Prevents iOS Safari auto-zoom on focus */
+      }
     }
+
     @media (max-width: 580px) {
-      .facts-ribbon, .footer-contact-cards { grid-template-columns: 1fr; }
+      .facts-ribbon, .footer-contact-cards {
+        grid-template-columns: 1fr;
+      }
+      .exhibition-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+      }
+      .contact-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+      .footer-ribbon-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+      .ribbon-pill {
+        width: 100%;
+        justify-content: center;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer-bottom a {
+        margin-left: 0;
+        margin-right: 1.2rem;
+      }
     }
   </style>
 </head>

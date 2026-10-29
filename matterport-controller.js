@@ -135,11 +135,47 @@
   const captionMeta = document.getElementById('caption-meta');
 
   canvas.addEventListener('pointerdown', (e) => {
+    pointerNDC.x = (e.clientX / window.innerWidth) * 2 - 1;
+    pointerNDC.y = -(e.clientY / window.innerHeight) * 2 + 1;
     tourState.isDragging = true;
     tourState.dragStartX = e.clientX;
     tourState.dragStartY = e.clientY;
     tourState.pointerMovedDistance = 0;
   });
+
+  // Two-finger pinch / drag support for walking on mobile touchscreens
+  let lastPinchDist = null;
+  canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      lastPinchDist = Math.hypot(dx, dy);
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2 && lastPinchDist !== null) {
+      dismissHeroIfNeeded();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const dist = Math.hypot(dx, dy);
+      const delta = (lastPinchDist - dist) * 0.045;
+      lastPinchDist = dist;
+      if (tourState.mode === 'walk') {
+        tourState.posX = THREE.MathUtils.clamp(tourState.posX - Math.sin(tourState.yaw) * delta * 0.4, -7.2, 7.2);
+        tourState.posZ = THREE.MathUtils.clamp(tourState.posZ - Math.cos(tourState.yaw) * delta, -135, 13);
+        updateHUDTelemetry();
+      } else if (tourState.mode === 'dollhouse') {
+        tourState.posZ = THREE.MathUtils.clamp(tourState.posZ - delta * 1.2, -132, 10);
+        camera.position.z = tourState.posZ - 12;
+        updateHUDTelemetry();
+      }
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchend', () => {
+    lastPinchDist = null;
+  }, { passive: true });
 
   window.addEventListener('pointermove', (e) => {
     pointerNDC.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -260,8 +296,11 @@
     }
   }
 
-  canvas.addEventListener('click', () => {
-    if (tourState.pointerMovedDistance > 10) return; // Ignore drag-releases
+  canvas.addEventListener('click', (e) => {
+    if (tourState.pointerMovedDistance > 14) return; // Ignore drag-releases
+    pointerNDC.x = (e.clientX / window.innerWidth) * 2 - 1;
+    pointerNDC.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    updateRaycasterInteractions();
     if (hoveredHitbox) {
       inspectSculpture3D(hoveredHitbox.userData.work.n);
     } else if (hoveredHotspot) {
@@ -269,6 +308,28 @@
       teleportToPoint(targetX, targetZ, 0);
     }
   });
+
+  // Mobile on-screen walk buttons (Forward / Backward)
+  const btnStepFwd = document.getElementById('mobile-step-fwd');
+  const btnStepBwd = document.getElementById('mobile-step-bwd');
+  if (btnStepFwd) {
+    btnStepFwd.addEventListener('click', () => {
+      dismissHeroIfNeeded();
+      if (tourState.mode === 'inspect') closeSculptureInspection(true);
+      tourState.posX = THREE.MathUtils.clamp(tourState.posX + Math.sin(tourState.yaw) * 3.2, -7.2, 7.2);
+      tourState.posZ = THREE.MathUtils.clamp(tourState.posZ - Math.cos(tourState.yaw) * 3.2, -135, 13);
+      updateHUDTelemetry();
+    });
+  }
+  if (btnStepBwd) {
+    btnStepBwd.addEventListener('click', () => {
+      dismissHeroIfNeeded();
+      if (tourState.mode === 'inspect') closeSculptureInspection(true);
+      tourState.posX = THREE.MathUtils.clamp(tourState.posX - Math.sin(tourState.yaw) * 3.2, -7.2, 7.2);
+      tourState.posZ = THREE.MathUtils.clamp(tourState.posZ + Math.cos(tourState.yaw) * 3.2, -135, 13);
+      updateHUDTelemetry();
+    });
+  }
 
   /* ==========================================================================
      4. 3D SCULPTURE INSPECTION & 360° TURNTABLE + DETAIL DRAWER
@@ -296,17 +357,18 @@
     detailImg.src = work.img;
     detailImg.alt = work.alt;
 
-    // Position camera right in front of the 3D pedestal so user sees the 3D sculpture next to the drawer
+    // Position camera right in front of the 3D pedestal so user sees the 3D sculpture next to / above the drawer
+    const isMobile = window.innerWidth <= 768;
     const normalX = placement.x > 0 ? -1 : 1;
-    const camTargetX = placement.x + normalX * 2.65;
-    const camTargetZ = placement.z + 1.85;
+    const camTargetX = placement.x + normalX * (isMobile ? 2.85 : 2.65);
+    const camTargetZ = placement.z + (isMobile ? 2.25 : 1.85);
 
     tourState.posX = 0;
     tourState.posZ = placement.z + 3.0;
 
     gsap.to(camera.position, {
       x: camTargetX,
-      y: 1.85,
+      y: isMobile ? 2.05 : 1.85,
       z: camTargetZ,
       duration: 1.15,
       ease: 'power3.inOut'
@@ -714,11 +776,14 @@
     renderer.render(scene, camera);
   }
 
-  window.addEventListener('resize', () => {
+  function syncViewportProjection() {
+    camera.fov = window.innerWidth < 680 ? 68 : 55;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+  }
+  syncViewportProjection();
+  window.addEventListener('resize', syncViewportProjection);
 
   animate();
 })();
